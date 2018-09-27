@@ -38,7 +38,7 @@ public class P2pUdpClient {
         client.chat();
     }
 
-    public void chat() throws Exception {
+    public void chat() {
         new Thread(() -> {
             while (true) {
                 final Scanner scanner = new Scanner(System.in);
@@ -93,7 +93,7 @@ public class P2pUdpClient {
         System.out.println("start success");
     }
 
-    protected void onReceivePacket(DatagramPacket packet) throws Exception {
+    private void onReceivePacket(DatagramPacket packet) {
         final String receiveData = new String(packet.getData(), StandardCharsets.UTF_8);
         System.out.println("receive data: " + receiveData + " from " + packet.getAddress() + ":" + packet.getPort());
         final Msg receiveMsg = Msg.from(receiveData);
@@ -154,7 +154,7 @@ public class P2pUdpClient {
      *
      * @throws Exception
      */
-    private void login() throws Exception {
+    public void login() throws Exception {
         sendCmd(Msg.CMD_LOGIN);
         System.out.println("login success");
     }
@@ -162,7 +162,7 @@ public class P2pUdpClient {
     /**
      * 获取用户列表，每隔5s更新一次
      */
-    private void list() {
+    public void list() {
         new Thread(() -> {
             while (true) {
                 try {

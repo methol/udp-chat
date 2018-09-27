@@ -33,6 +33,7 @@ public class P2pUdpServer {
     }
 
     public void start() throws SocketException {
+        // 创建数据报套接字并将其绑定到本地主机上的指定端口
         server = new DatagramSocket(PORT);
         new Thread(() -> {
             while (true) {
@@ -49,7 +50,7 @@ public class P2pUdpServer {
         System.out.println("Server Start port: " + PORT);
     }
 
-    public void onReceivePacket(DatagramPacket packet) throws Exception {
+    private void onReceivePacket(DatagramPacket packet) throws Exception {
         final String receiveData = new String(packet.getData(), StandardCharsets.UTF_8);
         System.out.println("receive data: " + receiveData + " from " +
                 packet.getAddress() + ":" + packet.getPort());
@@ -69,10 +70,12 @@ public class P2pUdpServer {
         Msg sendMsg = new Msg();
         sendMsg.setId(receiveMsg.getId());
         switch (cmd) {
+            // 客户端请求登录的时候，返回生成的clientId
             case Msg.CMD_LOGIN:
                 sendMsg.setCmd(Msg.CMD_LOGIN);
                 sendMsg.setContent(clientId);
                 break;
+            // 客户端请求所有用户列表，返回用户列表
             case Msg.CMD_LIST:
                 sendMsg.setCmd(Msg.CMD_LIST);
                 StringBuilder sb = new StringBuilder();
