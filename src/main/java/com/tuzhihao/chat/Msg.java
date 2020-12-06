@@ -1,3 +1,5 @@
+package com.tuzhihao.chat;
+
 /**
  * Created by tuzhihao on 2018/9/23.
  */

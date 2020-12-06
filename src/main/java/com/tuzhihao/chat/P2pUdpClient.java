@@ -1,3 +1,5 @@
+package com.tuzhihao.chat;
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -12,12 +14,12 @@ import java.util.concurrent.atomic.AtomicLong;
  * Created by tuzhihao on 2018/9/23.
  */
 public class P2pUdpClient {
-    private final static String SERVER_HOST = "s.tuzhihao.com";
-    private final static int SERVER_PORT = 9999;
+    private static final String SERVER_HOST = "192.168.10.52";
+    private static final int SERVER_PORT = 9999;
     /**
      * 消息id 自增
      */
-    private AtomicLong requestId = new AtomicLong(1);
+    private final AtomicLong requestId = new AtomicLong(1);
     private DatagramSocket client = null;
     /**
      * 服务端下发的客户端id(uuid)
@@ -151,8 +153,6 @@ public class P2pUdpClient {
 
     /**
      * 登录
-     *
-     * @throws Exception
      */
     public void login() throws Exception {
         sendCmd(Msg.CMD_LOGIN);
