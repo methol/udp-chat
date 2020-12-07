@@ -43,8 +43,7 @@ public class DiscoveryTest {
     }
 
     public static void main(String[] args) throws Exception {
-        InetAddress inetAddress = InetAddress.getByName("192.168.10.52");
-        final DiscoveryInfo result = new DiscoveryTest(inetAddress, "stun.sipgate.net", 10000).test();
+        final DiscoveryInfo result = new DiscoveryTest(InetAddress.getLocalHost(), "stun.sipgate.net", 10000).test();
         LOGGER.info(result.toString());
     }
 
